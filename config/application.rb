@@ -1,6 +1,7 @@
 require_relative 'boot'
 
 require 'dry/system/container'
+require 'dry/auto_inject'
 
 module GameOnAuth
   class Application < Dry::System::Container
@@ -13,4 +14,6 @@ module GameOnAuth
 
     load_paths!('lib')
   end
+
+  Import = Dry::AutoInject(Application)
 end

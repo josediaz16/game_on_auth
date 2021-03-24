@@ -1,6 +1,8 @@
 module GameOnAuth
   module Repos
     class UserRepo < ROM::Repository[:users]
+      include Import['container']
+
       struct_namespace GameOnAuth
 
       commands :create,
