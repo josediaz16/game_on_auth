@@ -63,7 +63,12 @@ GEM
       dry-schema (~> 1.5, >= 1.5.2)
     ice_nine (0.11.2)
     pg (1.2.3)
+    rack (2.2.3)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rake (13.0.3)
+    roda (3.42.0)
+      rack
     rom (5.2.6)
       rom-changeset (~> 5.2, >= 5.2.3)
       rom-core (~> 5.2, >= 5.2.5)
@@ -118,7 +123,9 @@ DEPENDENCIES
   dry-system
   dry-validation
   pg
+  rack-test
   rake
+  roda
   rom
   rom-sql
   rspec

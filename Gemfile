@@ -13,7 +13,10 @@ gem 'pg'
 gem 'dotenv'
 gem 'rake'
 
+gem 'roda'
+
 group :test do
   gem 'rspec'
   gem 'database_cleaner-sequel'
+  gem 'rack-test'
 end
