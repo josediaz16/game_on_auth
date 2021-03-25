@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bcrypt (3.1.16)
     concurrent-ruby (1.1.8)
     database_cleaner-core (2.0.1)
     database_cleaner-sequel (2.0.0)
@@ -122,6 +123,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt
   database_cleaner-sequel
   dotenv
   dry-auto_inject

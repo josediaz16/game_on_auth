@@ -14,8 +14,10 @@ gem 'dotenv'
 gem 'rake'
 
 gem 'roda'
-gem 'rodauth'
 gem 'puma'
+
+gem 'rodauth'
+gem 'bcrypt'
 
 group :test do
   gem 'rspec'

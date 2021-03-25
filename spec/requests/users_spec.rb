@@ -12,7 +12,7 @@ RSpec.describe '/users' do
   describe 'POST /' do
     context 'with valid input' do
       it 'returns 200' do
-        post_json '/users', input
+        post_json '/create-account', input
         expect(last_response.status).to eq(200)
 
         user = parsed_body
@@ -27,7 +27,7 @@ RSpec.describe '/users' do
       let(:input) { super().merge({ first_name: nil }) }
 
       it 'returns 422' do
-        post_json '/users', input
+        post_json '/create-account', input
         expect(last_response.status).to eq(422)
 
         expect(parsed_body['errors']['first_name']).to include('must be filled')
