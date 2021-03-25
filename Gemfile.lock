@@ -62,7 +62,10 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (~> 1.5, >= 1.5.2)
     ice_nine (0.11.2)
+    nio4r (2.5.7)
     pg (1.2.3)
+    puma (5.2.2)
+      nio4r (~> 2.0)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -123,6 +126,7 @@ DEPENDENCIES
   dry-system
   dry-validation
   pg
+  puma
   rack-test
   rake
   roda

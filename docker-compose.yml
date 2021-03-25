@@ -2,11 +2,13 @@ version: '3.8'
 services:
   web:
     build: .
-    command: bundle exec irb
+    command: bundle exec puma
     volumes:
       - .:/game_on_auth
     depends_on:
       - postgres
+    ports:
+      - 9292:9292
 
   postgres:
     image: postgres:12
