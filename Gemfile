@@ -14,6 +14,7 @@ gem 'dotenv'
 gem 'rake'
 
 gem 'roda'
+gem 'rodauth'
 gem 'puma'
 
 group :test do

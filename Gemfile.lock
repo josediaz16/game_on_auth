@@ -72,6 +72,9 @@ GEM
     rake (13.0.3)
     roda (3.42.0)
       rack
+    rodauth (2.11.0)
+      roda (>= 2.6.0)
+      sequel (>= 4)
     rom (5.2.6)
       rom-changeset (~> 5.2, >= 5.2.3)
       rom-core (~> 5.2, >= 5.2.5)
@@ -130,6 +133,7 @@ DEPENDENCIES
   rack-test
   rake
   roda
+  rodauth
   rom
   rom-sql
   rspec
