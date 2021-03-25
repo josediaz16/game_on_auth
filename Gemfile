@@ -12,3 +12,8 @@ gem 'pg'
 
 gem 'dotenv'
 gem 'rake'
+
+group :test do
+  gem 'rspec'
+  gem 'database_cleaner-sequel'
+end
