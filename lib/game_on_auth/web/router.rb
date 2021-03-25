@@ -6,6 +6,7 @@ module GameOnAuth
 
       plugin :json_parser
       plugin :json
+      plugin :common_logger, GameOnAuth::Application.logger
 
       route do |r|
         r.post 'users' do
