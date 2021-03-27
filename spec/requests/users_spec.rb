@@ -12,6 +12,7 @@ RSpec.describe '/users' do
   end
 
   let(:account_status_repo) { GameOnAuth::Repos::AccountStatusRepo.new }
+  let(:accounts_repo) { GameOnAuth::Repos::AccountRepo.new }
   let!(:unverfied_status) { account_status_repo.create({ id: 1, name: 'Unverified' }) }
 
   describe 'POST /' do
@@ -25,6 +26,8 @@ RSpec.describe '/users' do
         expect(user['account_id']).not_to be_nil
         expect(user['first_name']).to eq('John')
         expect(user['last_name']).to eq('Doe')
+
+        expect(accounts_repo.all.count).to eq(1)
       end
     end
 
@@ -36,6 +39,7 @@ RSpec.describe '/users' do
         expect(last_response.status).to eq(422)
 
         expect(parsed_body['errors']['first_name']).to include('must be filled')
+        expect(accounts_repo.all.count).to eq(0)
       end
     end
   end

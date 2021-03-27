@@ -27,7 +27,8 @@ module GameOnAuth
             @user = result.to_h
           in Failure(result)
             response.status = 422
-            throw_error(:errors, result.errors.to_h)
+            set_field_error(:errors, result.errors.to_h)
+            raise Sequel::Rollback
           end
         end
 
@@ -39,6 +40,8 @@ module GameOnAuth
             { errors: errors }.to_json
           in success: _message
             @user.to_json
+          else
+            json_body.to_json
           end
         end
       end
