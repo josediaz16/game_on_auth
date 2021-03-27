@@ -24,3 +24,7 @@ group :test do
   gem 'database_cleaner-sequel'
   gem 'rack-test'
 end
+
+group :test, :development do
+  gem 'byebug'
+end

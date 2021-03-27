@@ -3,11 +3,16 @@ require 'web_helper'
 RSpec.describe '/users' do
   let(:input) do
     {
+      login: 'johndoe@mail.com',
+      password: 'lkfasjdflkasd',
+      password_confirmation: 'lkfasjdflkasd',
       first_name: 'John',
-      last_name: 'Doe',
-      email: 'johndoe@mail.com'
+      last_name: 'Doe'
     }
   end
+
+  let(:account_status_repo) { GameOnAuth::Repos::AccountStatusRepo.new }
+  let!(:unverfied_status) { account_status_repo.create({ id: 1, name: 'Unverified' }) }
 
   describe 'POST /' do
     context 'with valid input' do
@@ -17,9 +22,9 @@ RSpec.describe '/users' do
 
         user = parsed_body
         expect(user['id']).not_to be_nil
+        expect(user['account_id']).not_to be_nil
         expect(user['first_name']).to eq('John')
         expect(user['last_name']).to eq('Doe')
-        expect(user['email']).to eq('johndoe@mail.com')
       end
     end
 

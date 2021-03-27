@@ -5,7 +5,9 @@ RSpec.describe GameOnAuth::Contracts::Users::CreateUser do
     {
       first_name: 'John',
       last_name: 'Doe',
-      email: 'johndoe@mail.com'
+      account_id: 1,
+      gender: 'male',
+      age: 25
     }
   end
 
@@ -35,12 +37,30 @@ RSpec.describe GameOnAuth::Contracts::Users::CreateUser do
     end
   end
 
-  context 'invalid email' do
-    let(:input) { super().merge(email: nil) }
+  context 'invalid account_id' do
+    let(:input) { super().merge(account_id: nil) }
 
     it 'is failure' do
       expect(result).to be_failure
-      expect(result.errors[:email]).to include('must be filled')
+      expect(result.errors[:account_id]).to include('must be filled')
+    end
+  end
+
+  context 'invalid gender' do
+    let(:input) { super().merge(gender: 'dog') }
+
+    it 'is failure' do
+      expect(result).to be_failure
+      expect(result.errors[:gender]).to include('must be one of: male, female')
+    end
+  end
+
+  context 'invalid age' do
+    let(:input) { super().merge(age: 'ten') }
+
+    it 'is failure' do
+      expect(result).to be_failure
+      expect(result.errors[:age]).to include('must be Integer')
     end
   end
 end

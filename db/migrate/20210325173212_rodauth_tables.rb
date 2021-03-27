@@ -153,6 +153,8 @@ ROM::SQL.migration do
 
   down do
     drop_table(
+      :account_password_hashes,
+      :account_previous_password_hashes,
       :account_sms_codes,
       :account_recovery_codes,
       :account_otp_keys,
@@ -169,8 +171,6 @@ ROM::SQL.migration do
       :account_authentication_audit_logs,
       :accounts,
       :account_statuses,
-      :account_previous_password_hashes,
-      :account_password_hashes
     )
     Rodauth.drop_database_previous_password_check_functions(self)
     Rodauth.drop_database_authentication_functions(self)

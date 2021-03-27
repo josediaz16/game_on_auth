@@ -1,4 +1,5 @@
 *.swp
 *.swo
+.byebug_history
 log/
 tmp/
