@@ -13,8 +13,20 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
 ENV['APP_ENV'] = 'test'
+
+require 'rom-factory'
+require 'database_cleaner/sequel'
+
+require_relative '../config/application'
+GameOnAuth::Application.finalize!
+
+Factory = ROM::Factory.configure do |config|
+  config.rom = GameOnAuth::Application.resolve('container')
+end
+
+Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |file| require file }
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -49,6 +61,8 @@ RSpec.configure do |config|
   config.before do
     DatabaseCleaner.clean
   end
+
+  config.include_context 'Authentication prerequisites', type: :request
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
@@ -105,8 +119,4 @@ RSpec.configure do |config|
 =end
 end
 
-require_relative '../config/application'
-GameOnAuth::Application.finalize!
-
-require 'database_cleaner/sequel'
 DatabaseCleaner.strategy = :truncation

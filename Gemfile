@@ -27,4 +27,5 @@ end
 
 group :test, :development do
   gem 'byebug'
+  gem 'rom-factory'
 end

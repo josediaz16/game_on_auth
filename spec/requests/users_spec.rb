@@ -1,6 +1,6 @@
 require 'web_helper'
 
-RSpec.describe '/users' do
+RSpec.describe '/users', type: :request do
   let(:input) do
     {
       login: 'johndoe@mail.com',
@@ -11,14 +11,12 @@ RSpec.describe '/users' do
     }
   end
 
-  let(:account_status_repo) { GameOnAuth::Repos::AccountStatusRepo.new }
   let(:accounts_repo) { GameOnAuth::Repos::AccountRepo.new }
-  let!(:unverfied_status) { account_status_repo.create({ id: 1, name: 'Unverified' }) }
 
-  describe 'POST /' do
+  describe 'POST /sign_up' do
     context 'with valid input' do
       it 'returns 200' do
-        post_json '/create-account', input
+        post_json '/users/sign_up', input
         expect(last_response.status).to eq(200)
 
         user = parsed_body
@@ -35,7 +33,7 @@ RSpec.describe '/users' do
       let(:input) { super().merge({ first_name: nil }) }
 
       it 'returns 422' do
-        post_json '/create-account', input
+        post_json '/users/sign_up', input
         expect(last_response.status).to eq(422)
 
         expect(parsed_body['errors']['first_name']).to include('must be filled')

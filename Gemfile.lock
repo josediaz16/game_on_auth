@@ -63,6 +63,10 @@ GEM
       dry-equalizer (~> 0.2)
       dry-initializer (~> 3.0)
       dry-schema (~> 1.5, >= 1.5.2)
+    faker (2.17.0)
+      i18n (>= 1.6, < 2)
+    i18n (1.8.10)
+      concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     nio4r (2.5.7)
     pg (1.2.3)
@@ -95,6 +99,11 @@ GEM
       dry-struct (~> 1.0)
       dry-types (~> 1.0)
       transproc (~> 1.0, >= 1.1.0)
+    rom-factory (0.10.2)
+      dry-configurable (~> 0.7)
+      dry-core (~> 0.4)
+      faker (>= 1.7, < 3.0)
+      rom-core (~> 5.0)
     rom-repository (5.2.2)
       dry-core (~> 0.4)
       dry-initializer (~> 3.0, >= 3.0.1)
@@ -139,6 +148,7 @@ DEPENDENCIES
   roda
   rodauth
   rom
+  rom-factory
   rom-sql
   rspec
 

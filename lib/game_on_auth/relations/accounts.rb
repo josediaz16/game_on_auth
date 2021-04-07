@@ -4,6 +4,7 @@ module GameOnAuth
       schema(:accounts, infer: true) do
         associations do
           has_one :user
+          has_many :account_password_hashes
         end
       end
     end
