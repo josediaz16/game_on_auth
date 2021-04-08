@@ -5,11 +5,39 @@ module GameOnAuth
 
       def self.configure(rodauth)
         rodauth.instance_eval do
-          enable :json, :login, :logout, :create_account
+          enable :json, :login, :jwt, :logout, :create_account
 
+          # General Config
           require_login_confirmation? false
           password_confirm_param 'password_confirmation'
+
+          # JSON Config
           json_response_field_error_key 'field_error'
+          json_response_body do |body|
+            json_body = body.transform_keys(&:to_sym)
+
+            case json_body
+            in field_error: [:errors, errors]
+              { errors: errors }.to_json
+
+            in { field_error: ['login', *] } | { field_error: ['password', *] }
+              { errors: { login: 'No matching login' } }.to_json
+
+            in success: _message
+              @user.to_json
+
+            else
+              json_body.to_json
+            end
+          end
+
+          # Login Config
+          login_route 'users/sign_in'
+
+          # JWT Config
+          jwt_secret ENV['SESSION_SECRET']
+
+          # Create Account Config
           create_account_route 'users/sign_up'
 
           after_create_account do
@@ -27,19 +55,6 @@ module GameOnAuth
               response.status = 422
               set_field_error(:errors, result.errors.to_h)
               raise Sequel::Rollback
-            end
-          end
-
-          json_response_body do |body|
-            json_body = body.transform_keys(&:to_sym)
-
-            case json_body
-            in field_error: [:errors, errors]
-              { errors: errors }.to_json
-            in success: _message
-              @user.to_json
-            else
-              json_body.to_json
             end
           end
 

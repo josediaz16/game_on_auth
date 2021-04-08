@@ -68,6 +68,7 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    jwt (2.2.2)
     nio4r (2.5.7)
     pg (1.2.3)
     puma (5.2.2)
@@ -141,6 +142,7 @@ DEPENDENCIES
   dry-monads
   dry-system
   dry-validation
+  jwt
   pg
   puma
   rack-test

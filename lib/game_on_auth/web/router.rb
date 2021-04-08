@@ -6,7 +6,7 @@ module GameOnAuth
       include Dry::Monads[:result]
 
       plugin :common_logger, GameOnAuth::Application.logger
-      plugin :sessions, secret: 'my-pinshe-secret-my-pinshe-secret-my-pinshe-secret-my-pinshe-secret-my-pinshe-secret-my-pinshe-secret'
+      plugin :sessions, secret: ENV['SESSION_SECRET']
 
       plugin :rodauth, json: :only do
         RodauthConfig.configure(self)

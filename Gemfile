@@ -18,6 +18,7 @@ gem 'puma'
 
 gem 'rodauth'
 gem 'bcrypt'
+gem 'jwt'
 
 group :test do
   gem 'rspec'
