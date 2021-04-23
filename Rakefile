@@ -10,3 +10,5 @@ namespace :db do
     config.gateways[:default].use_logger(Logger.new($stdout))
   end
 end
+
+Dir["#{File.dirname(__FILE__)}/lib/tasks/*.rake" ].each{ |rake_file| load rake_file }
