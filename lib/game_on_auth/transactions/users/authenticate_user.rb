@@ -37,17 +37,18 @@ module GameOnAuth
           response = make_request(url, { secret: ENV['SESSION_SECRET'] })
 
           case response
-          in { key:, secret: }
-            Success({ key: key, secret: secret })
+          in { key:, secret:, id: }
+            Success({ key: key, secret: secret, id: id })
           else
             Failure(:unable_to_create_jwt)
           end
         end
 
-        def craft_jwt(email:, key:, secret:)
+        def craft_jwt(email:, key:, secret:, id:)
           payload = {
             iss: key,
             email: email,
+            id: id,
             authenticated_by: 'password'
           }
 

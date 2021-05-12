@@ -29,6 +29,7 @@ RSpec.describe '/users', type: :request do
         decoded_jwt = JWT.decode(auth_header, ENV['SESSION_SECRET'], { algorithm: 'HS256' })
         expect(decoded_jwt[0]).to include({
           'email' => input[:login],
+          'id' => a_kind_of(String),
           'authenticated_by' => 'password'
         })
       end
