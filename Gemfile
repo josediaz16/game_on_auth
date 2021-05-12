@@ -19,11 +19,14 @@ gem 'puma'
 gem 'rodauth'
 gem 'bcrypt'
 gem 'jwt'
+gem 'faraday'
 
 group :test do
   gem 'rspec'
   gem 'database_cleaner-sequel'
   gem 'rack-test'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :test, :development do

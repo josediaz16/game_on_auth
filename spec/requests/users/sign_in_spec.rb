@@ -1,6 +1,12 @@
 require 'web_helper'
 
 RSpec.describe '/users', type: :request do
+  around do |example|
+    VCR.use_cassette('kong_login') do
+      example.run
+    end
+  end
+
   let(:input) do
     {
       login: user.account.email,
@@ -8,7 +14,8 @@ RSpec.describe '/users', type: :request do
     }
   end
 
-  let(:user) { Factory[:user] }
+  let(:account) { Factory[:account, email: 'michale.baumbach@klocko.org'] }
+  let(:user) { Factory[:user, account: account] }
 
   describe 'POST /sign_in' do
     context 'with valid credentials' do
@@ -21,8 +28,8 @@ RSpec.describe '/users', type: :request do
 
         decoded_jwt = JWT.decode(auth_header, ENV['SESSION_SECRET'], { algorithm: 'HS256' })
         expect(decoded_jwt[0]).to include({
-          'account_id' => user.account_id,
-          'authenticated_by' => ['password']
+          'email' => input[:login],
+          'authenticated_by' => 'password'
         })
       end
     end

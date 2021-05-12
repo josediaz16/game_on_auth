@@ -5,7 +5,7 @@ module GameOnAuth
 
       def self.configure(rodauth)
         rodauth.instance_eval do
-          enable :json, :login, :jwt, :logout, :create_account
+          enable :json, :login, :logout, :create_account
 
           # General Config
           require_login_confirmation? false
@@ -34,8 +34,17 @@ module GameOnAuth
           # Login Config
           login_route 'users/sign_in'
 
-          # JWT Config
-          jwt_secret ENV['SESSION_SECRET']
+          after_login do
+            authenticate_user = GameOnAuth::Transactions::Users::AuthenticateUser.new
+
+            case authenticate_user.call({ email: request.params['login'] })
+            in Success(token)
+              response['Authorization'] = token
+            in Failure(some)
+              response.status = 422
+              set_field_error(:errors, { login: 'Unable to create session' })
+            end
+          end
 
           # Create Account Config
           create_account_route 'users/sign_up'

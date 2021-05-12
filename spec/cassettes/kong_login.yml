@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://host.docker.internal:8001/consumers
+    body:
+      encoding: UTF-8
+      string: username=michale.baumbach@klocko.org
+    headers:
+      User-Agent:
+      - Faraday v1.4.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Wed, 12 May 2021 02:15:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Admin-Request-Id:
+      - vxCZipqvJUIF00Vc9JSBZDhIXu0tTmzz
+      Vary:
+      - Origin
+      Content-Length:
+      - '148'
+      X-Kong-Admin-Latency:
+      - '23'
+      Server:
+      - kong/2.3.3.0-enterprise-edition
+    body:
+      encoding: UTF-8
+      string: '{"custom_id":null,"created_at":1620785743,"id":"58cae83d-1753-4b4e-945f-e576e7d92562","tags":null,"username":"michale.baumbach@klocko.org","type":0}'
+  recorded_at: Wed, 12 May 2021 02:15:43 GMT
+- request:
+    method: post
+    uri: http://host.docker.internal:8001/consumers/michale.baumbach@klocko.org/jwt
+    body:
+      encoding: UTF-8
+      string: secret=85f6399d9d7885e69577fa2b892e7cd95412dc8cfd624e10f2d70c1859717a71180f283b1b6674c4ca03c5e4887b00e20a279674ec6f7903293ebd423b7af2e4
+    headers:
+      User-Agent:
+      - Faraday v1.4.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Wed, 12 May 2021 02:15:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Admin-Request-Id:
+      - tEE2HuyvT0kakfWNa2ReUDccxASIKGnE
+      Vary:
+      - Origin
+      Content-Length:
+      - '361'
+      X-Kong-Admin-Latency:
+      - '8'
+      Server:
+      - kong/2.3.3.0-enterprise-edition
+    body:
+      encoding: UTF-8
+      string: '{"created_at":1620785743,"id":"cf3fef34-b17f-4263-9ce7-86391f9846d7","tags":null,"secret":"85f6399d9d7885e69577fa2b892e7cd95412dc8cfd624e10f2d70c1859717a71180f283b1b6674c4ca03c5e4887b00e20a279674ec6f7903293ebd423b7af2e4","rsa_public_key":null,"consumer":{"id":"58cae83d-1753-4b4e-945f-e576e7d92562"},"key":"TKQXQ45qKA4aVQcpuAGRYxCRzymQG5F2","algorithm":"HS256"}'
+  recorded_at: Wed, 12 May 2021 02:15:43 GMT
+recorded_with: VCR 6.0.0
