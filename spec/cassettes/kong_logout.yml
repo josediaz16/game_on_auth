@@ -1,0 +1,124 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://host.docker.internal:8001/consumers
+    body:
+      encoding: UTF-8
+      string: username=michale.baumbach@klocko.org
+    headers:
+      User-Agent:
+      - Faraday v1.4.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      Date:
+      - Tue, 18 May 2021 20:41:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Admin-Request-Id:
+      - 7ipx6KjFMdZdLcxBnh8Wyka5nNcYaZ77
+      Vary:
+      - Origin
+      Content-Length:
+      - '185'
+      X-Kong-Admin-Latency:
+      - '7'
+      Server:
+      - kong/2.3.3.0-enterprise-edition
+    body:
+      encoding: UTF-8
+      string: '{"message":"UNIQUE violation detected on ''{username=\"michale.baumbach@klocko.org\"}''","name":"unique
+        constraint violation","fields":{"username":"michale.baumbach@klocko.org"},"code":5}'
+  recorded_at: Tue, 18 May 2021 20:41:00 GMT
+- request:
+    method: post
+    uri: http://host.docker.internal:8001/consumers/michale.baumbach@klocko.org/jwt
+    body:
+      encoding: UTF-8
+      string: secret=85f6399d9d7885e69577fa2b892e7cd95412dc8cfd624e10f2d70c1859717a71180f283b1b6674c4ca03c5e4887b00e20a279674ec6f7903293ebd423b7af2e4
+    headers:
+      User-Agent:
+      - Faraday v1.4.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Tue, 18 May 2021 20:41:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Admin-Request-Id:
+      - rEvvx6X7jLrDKsm8aW2zjy3exbUWt6qt
+      Vary:
+      - Origin
+      Content-Length:
+      - '361'
+      X-Kong-Admin-Latency:
+      - '5'
+      Server:
+      - kong/2.3.3.0-enterprise-edition
+    body:
+      encoding: UTF-8
+      string: '{"created_at":1621370460,"id":"cb6bfb4e-01e2-4958-9652-3e9f76d10b03","tags":null,"secret":"85f6399d9d7885e69577fa2b892e7cd95412dc8cfd624e10f2d70c1859717a71180f283b1b6674c4ca03c5e4887b00e20a279674ec6f7903293ebd423b7af2e4","rsa_public_key":null,"consumer":{"id":"58cae83d-1753-4b4e-945f-e576e7d92562"},"key":"0kE7GJR6WxKBTyOIJwMN31eCxXOM0JrA","algorithm":"HS256"}'
+  recorded_at: Tue, 18 May 2021 20:41:00 GMT
+- request:
+    method: delete
+    uri: http://host.docker.internal:8001/consumers/michale.baumbach@klocko.org/jwt/cb6bfb4e-01e2-4958-9652-3e9f76d10b03
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.4.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Date:
+      - Tue, 18 May 2021 21:27:04 GMT
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Admin-Request-Id:
+      - CWCsT3a7QWWasRoOqUyYRmLOzASCR82O
+      Vary:
+      - Origin
+      X-Kong-Admin-Latency:
+      - '15'
+      Server:
+      - kong/2.3.3.0-enterprise-edition
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Tue, 18 May 2021 21:27:04 GMT
+recorded_with: VCR 6.0.0

@@ -31,6 +31,22 @@ module GameOnAuth
             end
           end
 
+          # Logout Config
+          logout_route 'users/sign_out'
+
+          after_logout do
+            token = request.get_header('Authorization')
+            logout_user = GameOnAuth::Transactions::Users::LogoutUser.new
+
+            case logout_user.call(token: token)
+            in Success
+              response['Authorization'] = nil
+            in Failure(some)
+              response.status = 422
+              set_field_error(:errors, { login: 'Unable to destroy session' })
+            end
+          end
+
           # Login Config
           login_route 'users/sign_in'
 
@@ -45,6 +61,7 @@ module GameOnAuth
               set_field_error(:errors, { login: 'Unable to create session' })
             end
           end
+
 
           # Create Account Config
           create_account_route 'users/sign_up'

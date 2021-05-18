@@ -6,8 +6,8 @@ module RequestHelpers
     GameOnAuth::Web.app
   end
 
-  def post_json(path, data)
-    post path, data.to_json, 'CONTENT_TYPE' => 'application/json'
+  def post_json(path, data, headers: {})
+    post path, data.to_json, 'CONTENT_TYPE' => 'application/json', **headers
   end
 
   def parsed_body
