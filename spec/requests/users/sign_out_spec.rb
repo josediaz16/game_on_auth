@@ -24,7 +24,7 @@ RSpec.describe '/users', type: :request do
 
         auth_header = last_response.headers['Authorization']
 
-        post_json '/users/sign_out', {}, headers: { 'Authorization' => auth_header }
+        post_json '/users/sign_out', {}, headers: { 'HTTP_AUTHORIZATION' => auth_header }
         expect(last_response.status).to eq(200)
         expect(last_response.headers['Authorization']).to eq(nil)
       end

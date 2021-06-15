@@ -5,6 +5,7 @@ module GameOnAuth
 
       plugin :common_logger, GameOnAuth::Application.logger
       plugin :sessions, secret: ENV['SESSION_SECRET']
+      plugin :request_headers
 
       plugin :rodauth, json: :only do
         enable :json, :login, :logout, :create_account, :verify_account

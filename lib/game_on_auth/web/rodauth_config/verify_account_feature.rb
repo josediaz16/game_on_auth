@@ -8,6 +8,7 @@ module GameOnAuth
 
         def self.call(rodauth)
           rodauth.instance_eval do
+            verify_account_route 'users/verify'
             verify_account_email_subject 'Please verify your account'
 
             send_verify_account_email do

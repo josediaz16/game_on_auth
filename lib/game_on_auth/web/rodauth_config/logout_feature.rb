@@ -9,7 +9,7 @@ module GameOnAuth
             logout_route 'users/sign_out'
 
             after_logout do
-              token = request.get_header('Authorization')
+              token = request.headers['Authorization']
               logout_user = GameOnAuth::Transactions::Users::LogoutUser.new
 
               case logout_user.call(token: token)
