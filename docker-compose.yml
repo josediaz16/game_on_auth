@@ -1,12 +1,13 @@
 version: '3.8'
 services:
   web:
-    build: .
+    image: game_on_auth_web
     command: bundle exec puma
     volumes:
       - .:/game_on_auth
     depends_on:
       - postgres
+      - mailcatcher
     ports:
       - 9292:9292
 
@@ -16,6 +17,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+
+  mailcatcher:
+    image: game_on_auth_web
+    command: mailcatcher --foreground --ip 0.0.0.0
+    ports:
+      - 1025:1025
+      - 1080:1080
 
 volumes:
   postgres_data:

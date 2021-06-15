@@ -12,7 +12,7 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update && apt-get install postgresql-client-12 build-essential \
-    bc libcurl4-openssl-dev libpq-dev openssh-server git -y && \
+    bc libcurl4-openssl-dev libpq-dev openssh-server git libsqlite3-dev -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN gem install bundler

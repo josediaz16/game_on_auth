@@ -7,7 +7,7 @@ module GameOnAuth
         params do
           required(:first_name).filled(:string)
           required(:last_name).filled(:string)
-          required(:account_id).filled(:integer)
+          optional(:account_id).filled(:integer)
           optional(:gender).value(included_in?: GENDERS)
           optional(:age).value(type?: Integer)
         end
