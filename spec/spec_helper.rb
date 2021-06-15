@@ -63,6 +63,7 @@ RSpec.configure do |config|
   end
 
   config.include_context 'Authentication prerequisites', type: :request
+  config.include_context 'Authentication prerequisites', auth: :true
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
