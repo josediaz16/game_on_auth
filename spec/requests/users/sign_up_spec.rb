@@ -1,9 +1,15 @@
 require 'web_helper'
 
 RSpec.describe '/users', type: :request do
+  around do |example|
+    VCR.use_cassette('kong_login') do
+      example.run
+    end
+  end
+
   let(:input) do
     {
-      login: 'johndoe@mail.com',
+      login: 'michale.baumbach@klocko.org',
       password: 'lkfasjdflkasd',
       password_confirmation: 'lkfasjdflkasd',
       first_name: 'John',
@@ -26,6 +32,36 @@ RSpec.describe '/users', type: :request do
         expect(user['last_name']).to eq('Doe')
 
         expect(accounts_repo.all.count).to eq(1)
+
+        account = accounts_repo
+          .accounts
+          .combine(:account_status)
+          .one
+
+        expect(account.account_status.name).to eq('Unverified')
+      end
+    end
+
+    context 'verify account' do
+      it 'returns 200' do
+        post_json '/users/sign_up', input
+        expect(last_response.status).to eq(200)
+
+        urls = URI.extract(Mail::TestMailer.deliveries.first.body.to_s, ['http'])
+        params = Addressable::URI.parse(urls.first).query_values
+        key = params['key'].gsub(/\./, '')
+
+        post_json "/users/verify?key=#{key}", input
+
+        account = accounts_repo
+          .accounts
+          .combine(:account_status)
+          .one
+
+        expect(account.account_status.name).to eq('Verified')
+
+        auth_header = last_response.headers['Authorization']
+        expect(auth_header).not_to eq(nil)
       end
     end
 
