@@ -20,6 +20,7 @@ gem 'rodauth'
 gem 'bcrypt'
 gem 'jwt'
 gem 'faraday'
+gem 'mail'
 
 group :test do
   gem 'rspec'
