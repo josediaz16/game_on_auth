@@ -12,7 +12,7 @@ module GameOnAuth
 
         require_login_confirmation? false
         password_confirm_param 'password_confirmation'
-        base_url 'http://localhost:3000'
+        base_url ENV['API_ROOT']
 
         RodauthConfig::JsonFeature.call(self)
         RodauthConfig::LogoutFeature.call(self)

@@ -3,6 +3,7 @@ require 'web_helper'
 RSpec.describe '/users', type: :request do
   around do |example|
     VCR.use_cassette('kong_login') do
+      Mail::TestMailer.deliveries.clear
       example.run
     end
   end
