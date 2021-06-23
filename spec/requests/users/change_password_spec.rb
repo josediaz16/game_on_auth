@@ -3,6 +3,7 @@ require 'web_helper'
 RSpec.describe '/users', type: :request do
   around do |example|
     VCR.use_cassette('kong_login') do
+      Mail::TestMailer.deliveries.clear
       example.run
     end
   end
@@ -22,6 +23,11 @@ RSpec.describe '/users', type: :request do
 
         post_json '/users/change_password', input, headers: { 'HTTP_AUTHORIZATION' => auth_header }
         expect(last_response.status).to eq(200)
+
+        last_mail = Mail::TestMailer.deliveries.last
+        expect(last_mail.to).to include(user.account.email)
+        expect(last_mail.subject).to eq('Password Changed')
+        expect(last_mail.body.to_s).to eq('Your password has been changed successfully. If you did not perform this action please contact us')
       end
     end
 

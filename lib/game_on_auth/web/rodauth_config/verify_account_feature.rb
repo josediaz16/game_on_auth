@@ -1,5 +1,3 @@
-require 'byebug'
-
 module GameOnAuth
   module Web
     module RodauthConfig
