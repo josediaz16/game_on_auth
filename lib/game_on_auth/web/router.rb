@@ -8,10 +8,16 @@ module GameOnAuth
       plugin :request_headers
 
       plugin :rodauth, json: :only do
-        enable :json, :login, :logout, :create_account, :verify_account
+        enable :json, :login, :logout, :create_account, :verify_account, :change_password
 
         require_login_confirmation? false
+
+        change_password_requires_password? true
+        change_password_route 'users/change_password'
+        new_password_param 'new_password'
+
         password_confirm_param 'password_confirmation'
+
         base_url ENV['API_ROOT']
 
         RodauthConfig::JsonFeature.call(self)

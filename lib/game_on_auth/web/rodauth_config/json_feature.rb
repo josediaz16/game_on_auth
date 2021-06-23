@@ -16,6 +16,9 @@ module GameOnAuth
               in { field_error: ['login', *] } | { field_error: ['password', *] }
                 { errors: { login: 'No matching login' } }.to_json
 
+              in field_error: [String => field, String => message]
+                { errors: { field => message } }.to_json
+
               in success: _message
                 @user.to_json
 
